@@ -21,7 +21,7 @@ module HammerCLIKatello
         :csv
       end
 
-      apipie_options
+      build_options
     end
 
     class InfoCommand < HammerCLIKatello::InfoCommand
@@ -52,7 +52,7 @@ module HammerCLIKatello
         end
       end
 
-      apipie_options
+      # build_options
     end
 
     class EnableCommand < HammerCLIKatello::UpdateCommand
@@ -62,7 +62,7 @@ module HammerCLIKatello
       success_message _("Repository set enabled")
       failure_message _("Could not enable repository set")
 
-      apipie_options
+      build_options
     end
 
     class DisableCommand < HammerCLIKatello::UpdateCommand
@@ -72,7 +72,7 @@ module HammerCLIKatello
       success_message _("Repository set disabled")
       failure_message _("Could not disable repository set")
 
-      apipie_options
+      build_options
     end
 
     autoload_subcommands
