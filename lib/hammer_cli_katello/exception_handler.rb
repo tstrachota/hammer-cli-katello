@@ -1,5 +1,18 @@
 
 module HammerCLIKatello
+  module ForemanExceptionHandlerExtensions
+    def ssl_cert_instructions
+      host_url = HammerCLI::Settings.get(:_params, :host) || HammerCLI::Settings.get(:foreman, :host)
+      uri = URI.parse(host_url)
+      cert_url = "http://#{uri.host}/pub/katello-server-ca.crt"
+
+      _("Make sure you downloaded the server ca certificate from %{cert_url} and installed it onto your system.") % { :cert_url => cert_url } +
+      "\n" +
+      _("Alternatively you can use options --ssl-ca-path and --ssl-ca-file or corresponding settings in your configuration file.")
+    end
+  end
+  ::HammerCLIForeman::ExceptionHandler.prepend(ForemanExceptionHandlerExtensions)
+
   class ExceptionHandler < HammerCLIForeman::ExceptionHandler
     def mappings
       super + [
